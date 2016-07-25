@@ -1,1 +1,78 @@
+<?php
+// This is a sample for 123ContactForm WebHooks usage
+// In this example, we will capture all data received using HTTP POST and send it by email
+// Using WebHooks, you can extend the use of 123ContactForm web forms,
+// ie: store the data in your own database, directly display it on your website etc.
+// for more details, visit http://www.123contactform.com/webhooks.html 
 
+$formdata = ARRAY();
+foreach ($_POST as $key => $value) {
+$value = stripslashes($value);
+$formdata[$key]=$value;
+}
+if (array_key_exists('uid', $formdata)==false) die('One essential parameter was not POST-ed. Exiting.');
+
+// We will now collect all received data, and send by email
+$emailtxt="Received data:\r\n";
+
+
+//Lets use field Subject
+$emailtxt.="$formdata[controlname190] is "; $emailtxt.="$formdata[controlvalue190]\r\n"; 
+
+//Lets use field Name - component # 1
+$emailtxt.=$formdata['controlname2088968-1']." is "; $emailtxt.=$formdata['controlvalue2088968-1']."\r\n"; 
+
+//Lets use field Name - component # 2
+$emailtxt.=$formdata['controlname2088968-2']." is "; $emailtxt.=$formdata['controlvalue2088968-2']."\r\n"; 
+
+//Lets use field Email
+$emailtxt.="$formdata[controlname189] is "; $emailtxt.="$formdata[controlvalue189]\r\n"; 
+
+//Lets use field Your 123ContactForm username
+$emailtxt.="$formdata[controlname1474] is "; $emailtxt.="$formdata[controlvalue1474]\r\n"; 
+
+//Lets use field Your account Status
+$emailtxt.="$formdata[controlname367263] is "; $emailtxt.="$formdata[controlvalue367263]\r\n"; 
+
+//Lets use field URL
+$emailtxt.="$formdata[controlname2089107] is "; $emailtxt.="$formdata[controlvalue2089107]\r\n"; 
+
+//Lets use field Form URL
+$emailtxt.="$formdata[controlname13054140] is "; $emailtxt.="$formdata[controlvalue13054140]\r\n"; 
+
+//Lets use field Form URL
+$emailtxt.="$formdata[controlname119314] is "; $emailtxt.="$formdata[controlvalue119314]\r\n"; 
+
+//Lets use field On which website did you find the form?
+$emailtxt.="$formdata[controlname5747808] is "; $emailtxt.="$formdata[controlvalue5747808]\r\n"; 
+
+//Lets use field Message
+$emailtxt.="$formdata[controlname191] is "; $emailtxt.="$formdata[controlvalue191]\r\n"; 
+
+//Lets use field Message
+$emailtxt.="$formdata[controlname19352765] is "; $emailtxt.="$formdata[controlvalue19352765]\r\n"; 
+
+//Lets use field Would you like to be contacted by a member of our team?
+$emailtxt.="$formdata[controlname2577963] is "; $emailtxt.="$formdata[controlvalue2577963]\r\n"; 
+
+//Lets use field Phone number
+$emailtxt.="$formdata[controlname2578148] is "; $emailtxt.="$formdata[controlvalue2578148]\r\n"; 
+
+//Lets use field Skype ID
+$emailtxt.="$formdata[controlname12277587] is "; $emailtxt.="$formdata[controlvalue12277587]\r\n"; 
+
+// We will now add other data sent by 123ContactForm: UserID, FormID, MessageID, IP
+$emailtxt.="UID is "; $emailtxt.="$formdata[uid]\r\n";
+$emailtxt.="FID is "; $emailtxt.="$formdata[fid]\r\n";
+$emailtxt.="MID is "; $emailtxt.="$formdata[mid]\r\n";
+$emailtxt.="IP is "; $emailtxt.="$formdata[ip]\r\n";
+$emailtxt.="Referer is "; $emailtxt.="$formdata[referer]\r\n";
+
+
+// Now lets send an email
+$from="From: support@123contactform.com<support@123contactform.com>\r\nReturn-path: support@123contactform.com";
+mail("droptop35thanniv@aol.com", 'WebHooks Example', $emailtxt, $from);
+
+// Now that you understood how WebHooks work, you can go for advanced tasks:
+// store in your database, post to your blog or guestbook, send data by fax, conquer Mars...
+?>
